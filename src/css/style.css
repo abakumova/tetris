@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: cadetblue;
+}
+
+.main {
+    width: 320px;
+    height: 620px;
+    margin: 100px auto 0;
+    border: 10px solid skyblue;
+    font-size: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cell {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid skyblue;
+}
+
+.moving-cell {
+    background-color: #a543d5;
+}
+
+.fixed-cell {
+    background-color: #e0e249;
+}
