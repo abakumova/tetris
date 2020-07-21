@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <title>Tetris</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- 10x20 -->
-<div class="main"></div>
+<div class="grid-container">
+    <!-- 10x20 -->
+    <div class="field">
+        <div class="main">
+        </div>
+    </div>
+    <div class="rule">
+        <h1>Press</h1>
+        <em class="arrow left"></em>
+        <em class="arrow down"></em>
+        <em class="arrow right"></em>
+    </div>
+    <div class="score">
+        <h1>Score</h1>
+        <h2 id="score-value"></h2>
+    </div>
+</div>
 <script src="src/js/main.js"></script>
 </body>
 </html>

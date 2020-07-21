@@ -2,9 +2,37 @@
     box-sizing: border-box;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     margin: 0;
     background: cadetblue;
+    font-family: 'Montserrat', sans-serif;
+    color: #e0e249;
+    min-height: 100%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas: ". field field ." "rule field field score" ". field field .";
+}
+
+.field {
+    grid-area: field;
+}
+
+.rule {
+    grid-area: rule;
+    justify-self: center;
+}
+
+.score {
+    grid-area: score;
 }
 
 .main {
@@ -16,6 +44,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 
 .cell {
@@ -31,4 +60,27 @@ body {
 
 .fixed-cell {
     background-color: #e0e249;
+}
+
+.arrow {
+    border: solid #e0e249;
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
