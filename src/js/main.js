@@ -177,3 +177,12 @@ function fix() {
     playField[0] = [0, 0, 0, 0, 1, 1, 0, 0, 0, 0];
     playField[1] = [0, 0, 0, 0, 1, 1, 0, 0, 0, 0];
 }
+
+function changePlayPauseButton() {
+    let change = document.getElementById("play-pause");
+    if (change.className === "pause-button") {
+        change.className = "play-button";
+    } else {
+        change.className = "pause-button";
+    }
+}

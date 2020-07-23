@@ -19,7 +19,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1px 1px;
-    grid-template-areas: ". field field ." "rule field field score" ". field field .";
+    grid-template-areas: ". field field button" "rule field field score" ". field field .";
 }
 
 .field {
@@ -33,6 +33,11 @@ body {
 
 .score {
     grid-area: score;
+}
+
+.button {
+    grid-area: button;
+    align-self: end;
 }
 
 .main {
@@ -83,4 +88,29 @@ body {
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+.start-button {
+    margin-left: 0;
+    margin-right: 30px;
+    font-size: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #e0e249;
+}
+
+.pause-button {
+    background: url('../statics/pause.ico') no-repeat;
+    height: 25px;
+    width: 25px;
+    outline: none !important;
+    border: none;
+}
+
+.play-button {
+    background: url('../statics/play.ico') no-repeat;
+    height: 25px;
+    width: 25px;
+    outline: none !important;
+    border: none;
 }
