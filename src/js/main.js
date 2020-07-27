@@ -1,6 +1,11 @@
 let main = document.querySelector(".main");
 let gameSpeed = 400;
 
+const scoreElement = document.getElementById("score-value");
+let score = 0;
+let isPaused = false;
+let gameTimerID;
+
 //0 - free; 1 - moving; 2 - fixed
 let playField = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -26,40 +31,50 @@ let playField = [
 ];
 
 function draw() {
-    let mainInnerHTML = "";
-    for (let y = 0; y < playField.length; y++) {
-        for (let x = 0; x < playField[y].length; x++) {
-            if (playField[y][x] === 1) {
-                mainInnerHTML += '<div class="cell moving-cell"></div>';
-            } else if (playField[y][x] === 2) {
-                mainInnerHTML += '<div class="cell fixed-cell"></div>';
-            } else {
-                mainInnerHTML += '<div class="cell"></div>';
+    if (!isPaused) {
+        let mainInnerHTML = "";
+        for (let y = 0; y < playField.length; y++) {
+            for (let x = 0; x < playField[y].length; x++) {
+                if (playField[y][x] === 1) {
+                    mainInnerHTML += '<div class="cell moving-cell"></div>';
+                } else if (playField[y][x] === 2) {
+                    mainInnerHTML += '<div class="cell fixed-cell"></div>';
+                } else {
+                    mainInnerHTML += '<div class="cell"></div>';
+                }
             }
         }
+        main.innerHTML = mainInnerHTML;
     }
-    main.innerHTML = mainInnerHTML;
 }
-
-draw();
 
 function startGame() {
     moveDown();
-    draw();
-    setTimeout(startGame, gameSpeed);
+    if (!isPaused) {
+        updateGameState();
+        setTimeout(startGame, gameSpeed);
+    }
+}
+
+function updateGameState() {
+    if (!isPaused) {
+        draw();
+    }
 }
 
 setTimeout(startGame, gameSpeed);
 
 document.onkeydown = function (e) {
-    if (e.code === "ArrowLeft") {
-        moveLeft();
-    } else if (e.code === "ArrowRight") {
-        moveRight();
-    } else if (e.code === "ArrowDown") {
-        moveDown();
+    if (!isPaused) {
+        if (e.code === "ArrowLeft") {
+            moveLeft();
+        } else if (e.code === "ArrowRight") {
+            moveRight();
+        } else if (e.code === "ArrowDown") {
+            moveDown();
+        }
+        draw();
     }
-    draw();
 };
 
 function canMoveDown() {
@@ -148,7 +163,8 @@ function moveRight() {
 
 
 function removeFullLines() {
-    let canRemoveLine = true;
+    let canRemoveLine = true,
+        filledLines = 0;
     for (let y = 0; y < playField.length; y++) {
         for (let x = 0; x < playField[y].length; x++) {
             if (playField[y][x] !== 2) {
@@ -158,10 +174,28 @@ function removeFullLines() {
         }
         if (canRemoveLine) {
             playField.splice(y, 1);
-            playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            playField.splice(0, 0, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+            filledLines += 1;
         }
         canRemoveLine = true;
     }
+
+    switch (filledLines) {
+        case 1:
+            score += 10;
+            break;
+        case 2:
+            score += 10 * 3;
+            break;
+        case 3:
+            score += 10 * 6;
+            break;
+        case 4:
+            score += 10 * 12;
+            break;
+    }
+
+    scoreElement.innerHTML = score;
 }
 
 function fix() {
@@ -182,7 +216,10 @@ function changePlayPauseButton() {
     let change = document.getElementById("play-pause");
     if (change.className === "pause-button") {
         change.className = "play-button";
+        clearTimeout(gameTimerID);
     } else {
         change.className = "pause-button";
+        gameTimerID = setTimeout(startGame, gameSpeed);
     }
+    isPaused = !isPaused;
 }
