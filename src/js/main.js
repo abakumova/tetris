@@ -215,9 +215,11 @@ function fix() {
 function changePlayPauseButton() {
     let change = document.getElementById("play-pause");
     if (change.className === "pause-button") {
+        change.style.removeProperty('pause-button');
         change.className = "play-button";
         clearTimeout(gameTimerID);
     } else {
+        change.style.removeProperty('play-button');
         change.className = "pause-button";
         gameTimerID = setTimeout(startGame, gameSpeed);
     }
