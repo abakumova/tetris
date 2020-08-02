@@ -7,4 +7,4 @@ You can play [tetris](https://abakumova.github.io/tetris/) online (using Github 
 ### Stack
 - JavaScript
 - HTML5
-- CSS3 (flexbox)
+- CSS3 (grid, flexbox)
